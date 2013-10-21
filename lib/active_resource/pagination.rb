@@ -7,6 +7,7 @@ module ActiveResource
     class PagedArray < Array
       attr_accessor :total_pages
       attr_accessor :current_page
+      attr_accessor :total_entries
     end
 
     # PagingFormatter expects a JSON response that looks like this (for a resource named "posts"):
@@ -31,8 +32,9 @@ module ActiveResource
         if meta.is_a?(Hash) && meta['total_pages']
           list = PagedArray.new(meta[collection_name])
 
-          list.total_pages  = meta['total_pages']
-          list.current_page = meta['current_page']
+          list.total_pages   = meta['total_pages']
+          list.current_page  = meta['current_page']
+          list.total_entries = meta['total_entries']
 
           list
         elsif meta.is_a?(Array)
@@ -40,6 +42,7 @@ module ActiveResource
 
           list.total_pages = 1
           list.current_page = 1
+          list.total_entries = 1
 
           list
         else
