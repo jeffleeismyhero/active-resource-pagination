@@ -17,6 +17,7 @@ This will add a JSON decoder that intercepts any response with the format:
 {
   "total_pages": 5,
   "current_page": 1,
+  "total_entries": 5,
   "posts": [{
     "id": 1
   }]
